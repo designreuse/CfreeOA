@@ -1,0 +1,59 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
+<div id=PageSelectorBar>
+	<div id=PageSelectorMemo>
+		页次：${currentPage}/${pageCount }页 &nbsp;
+		每页显示：${pageSize }条 &nbsp;
+		总记录数：${recordCount }条
+	</div>
+	<div id=PageSelectorSelectorArea>
+	
+	<div class="footer">
+       <!--分页导航-->
+       <ul class="pagination" style="float: left; margin: 0 10px 0 10px">
+        <li><a href="javascript: gotoPage(1)" title="首页">首页</a></li>
+        <!-- 上一页 -->
+        <!-- <li><a href="#">&laquo;</a></li> -->
+        
+        <s:iterator begin="%{beginPageIndex}" end="%{endPageIndex}" var="num">
+        <!--当前页状态-->
+        <s:if test="#num == currentPage"> <%-- 当前页 --%>
+       	 	<li class="active"><a href="#">${num}</a></li>
+			<%-- <span class="PageSelectorNum PageSelectorSelected">${num}</span> --%>
+		</s:if>
+        <s:else> <%-- 非当前页 --%>
+        	<li style="cursor: hand;" onClick="gotoPage(${num});"><a >${num}</a></li>
+			<%-- <span class="PageSelectorNum" style="cursor: hand;" onClick="gotoPage(${num});">${num}</span> --%>
+		</s:else>       
+        </s:iterator>
+        <!-- 下一页 -->
+        <!-- <li><a href="#">&raquo;</a></li> -->
+        <li><a href="javascript: gotoPage(${pageCount})" title="尾页">尾页</a></li>
+      
+      </ul>
+		
+		<span style="float:left;line-height:30px;">转到:</span>
+		<div class="form-group" style="float:left">
+		<select onchange="gotoPage(this.value)" id="_pn" class="form-control">
+			<s:iterator begin="1" end="%{pageCount}" var="num">
+				<option value="${num}">${num}</option>
+			</s:iterator>
+		</select>
+		</div>
+		<script type="text/javascript">
+			$("#_pn").val("${currentPage}");
+		</script>
+	</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	function gotoPage( pageNum ){
+		// window.location.href = "forum_show.action?id=${id}&pageNum=" + pageNum;
+		
+		$(document.forms[0]).append("<input type='hidden' name='pageNum' value='" + pageNum +"'>");
+		document.forms[0].submit();
+	}
+</script>

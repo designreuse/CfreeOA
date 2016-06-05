@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.sise.oa.domain">
+
+	<class name="User" table="user">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="loginName" />
+		<property name="password" />
+		<property name="name" />
+		<property name="gender" />
+		<property name="phoneNumber" />
+		<property name="email" />
+		<property name="description" />
+		
+		<!-- parent属性，表示本类与User(上级)的多对一关系 -->
+		<many-to-one name="parent" class="User" column="parentId"/>
+		
+		<!-- childrens属性，表示本类与User(下级)的一对多关系 -->
+		<set name="childrens" lazy="false" order-by="id ASC">
+			<key column="parentId"/>
+			<one-to-many class="User"/>
+		</set>
+		
+		<!-- department属性，本类与Department的多对一 -->
+		<many-to-one name="department" class="Department" column="departmentId"></many-to-one>		
+				
+		<!-- roles属性，本类与Role的多对多 -->
+		<set name="roles" table="user_role" lazy="false">
+			<key column="userId"></key>
+			<many-to-many class="Role" column="roleId"></many-to-many>
+		</set>
+		
+		<!-- schedules属性，是本类与 Schedule的一对多的关系-->
+		<set name="schedules" lazy="false">
+			<key column="userId" />
+			<one-to-many class="Schedule" />
+		</set>
+		
+		<!-- informations属性，本类与Information的多对多关系 -->
+		<set name="informations" table="user_information" lazy="false">
+			<key column="userId" />
+			<many-to-many class="Information" column="informationId" />
+		</set>
+		
+		<!-- myApplications属性，本类与MyApplication的一对多关系 -->
+		<set name="myApplications" >
+			<key column="userId" />
+			<one-to-many class="MyApplication"/>
+		</set>
+		
+		<!-- reservations属性，本类与Reservation的一对多关系 -->
+		<set name="reservations" >
+			<key column="userId" />
+			<one-to-many class="Reservation"/>
+		</set>
+		
+		<!-- calendars属性，本类与Calendar的一对多关系 -->
+		<set name="calendars" >
+			<key column="userId" />
+			<one-to-many class="Calendar"/>
+		</set>
+		
+	</class>
+	
+</hibernate-mapping>

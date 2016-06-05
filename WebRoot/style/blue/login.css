@@ -1,0 +1,79 @@
+
+body{
+	margin:0;
+	font-family:宋体;
+	font-size=15px;
+	color:#2d3744;
+	font-weight:bold;
+	text-align:center;
+   position:relative;
+	height:600px;
+	background:url(../images/deng.gif);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+#logintable{
+	background:none;
+}
+
+#logo{
+  margin:auto;  
+  position: absolute;  
+  top: -290px; left: 0; bottom: 0; right: 0;
+  width: 300px;
+  height: 187px;
+  z-index:10;
+}
+
+#logo img{
+	width:inherit;
+	height:inherit;
+}
+
+#logo #description{
+	color: #024384;
+	font-size: 17px;
+}
+
+#login{
+  margin:auto;  
+  position: absolute;  
+  top: 180px; left: 0; bottom: 0; right: 0;
+  width: 300px;
+  height: 200px;
+  z-index:10;
+}
+
+#loginButton{
+	margin-top: 30px;
+	background:#759dbb;
+	color:#fff;
+	width:100%;
+	border:0px;
+}
+
+
+#loginButton:focus, #loginButton.focus{
+	background:#6ec5e9;
+	color:#fff;
+	border:0px;
+}
+#loginButton:visited{
+	background:#6ec5e9;
+	color:#fff;
+}
+#loginButton:hover{
+	background:#5298b5;
+	color:#fff;
+}
+#footer{
+  margin:auto;  
+  position: absolute;  
+  top: 600px; left: 0; bottom: 0; right: 0;
+  width: 100%;
+  z-index:10;
+  color: #024384;
+  font-size:16px;
+}

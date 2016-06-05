@@ -1,0 +1,31 @@
+/* CSS Document */
+
+body{
+	font-family: "宋体";
+	font-size: 12px;
+	background:#35383b;
+	color:#ffffff;
+}
+
+.userId{
+	font-size: 17px;
+	margin:2px;
+}
+
+.welcome{
+	font-size: 14px;
+	margin:2px;
+}
+
+A:link {
+	COLOR: #ff0000;
+}
+A:visited {
+	COLOR: #ff0000;
+}
+A:active {
+	COLOR: #ff0000;
+}
+A:hover {
+	COLOR: #ff0000;
+}

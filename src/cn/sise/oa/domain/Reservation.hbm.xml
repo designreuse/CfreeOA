@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.sise.oa.domain">
+	<class name="Reservation">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property  name="title" />
+		<property  name="summary" />
+		<property  name="feedback" />
+		<property  name="emergencyLevel" />
+		<property  name="createTime" type="timestamp"/>
+		<property  name="startTime" type="timestamp"/>
+		<property  name="endTime" type="timestamp"/>
+		<property  name="state" />
+		<property  name="handelUser" />
+		<property  name="handle" />
+		<property  name="showInPage" />
+		
+		<!-- 属性meetingRoom，表示本类与 MeetingRoom类的多对一关系-->
+		<many-to-one name="meetingRoom" class="MeetingRoom" column="meetingRoomId"/>
+		
+		<!-- 属性user，表示本类与 User类的多对一关系-->
+		<many-to-one name="user" class="User" column="userId"/>
+		
+	</class>
+</hibernate-mapping>

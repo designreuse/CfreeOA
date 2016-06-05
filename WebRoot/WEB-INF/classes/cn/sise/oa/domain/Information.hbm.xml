@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.sise.oa.domain">
+	<class name="Information" table="information">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="title" />
+		<property name="content" />
+		<property name="sendTime" />
+		<property name="endTime" />
+		<property name="status"/>
+		<property name="senderId" />
+		<!-- sendee属性，本类与User的多对多关系 -->
+		<set name="sendee" table="user_information" lazy="false">
+			<key column="informationId" />
+			<many-to-many class="User" column="userId" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,158 @@
+@charset "utf-8";
+/* CSS Document */
+
+img{
+	border: none;
+}
+
+th{
+	background:#dff3f9;	
+}
+
+table tr td{
+	padding-top: 5px;
+}
+
+A:link {
+	TEXT-DECORATION: none
+}
+A:visited {
+	TEXT-DECORATION: none
+}
+A:active {
+	TEXT-DECORATION: none
+}
+A:hover {
+	TEXT-DECORATION: underLine;
+}
+
+body {
+	background-color: #f4fffd;
+	color: #3c7e74;
+	font-size: 12px;
+	font-family: 宋体;
+	scrollbar-base-color: #dbecf8;
+	scrollbar-arrow-color: #2a8ed1;
+	scrollbar-track-color: #bdddf2;
+	scrollbar-3dlight-color: #2886c5;
+	scrollbar-darkshadow-color: #2886c5;
+	scrollbar-face-color: #dbecf8;
+	scrollbar-shadow-color: #dbecf8;
+	margin-left: 1px;
+	margin-right: 1px;
+	margin-top: 0; 
+	padding:5px;
+}
+
+td {
+	font-size: 12px;
+	font-family: 宋体;
+	color:#2d3744;
+}
+
+ul {
+	list-style-type: none;
+}
+
+#Title_bar {
+	height: 22px;
+	width: 100%;
+	line-height:22px;
+	/*float: left;*/
+	background: #bcdcd5;
+	border-bottom: 0px solid #ffffff;
+	color:#35383b;
+	margin-bottom: 10px;
+	
+}
+
+
+/*====================*/
+td.tsubmitBtnTD{
+	padding-top:10px; 
+	padding-left:35%;
+}
+
+.mainForm{
+	margin-left: 50px;
+	width: 80%;
+	border: none;
+}
+
+.red{
+	color: red;
+}
+
+.Separator{
+	border-top:#999 1px solid;
+	border-bottom:#999 1px solid;
+	padding:10px 0 10px 5px;
+}
+.footer{
+	margin:5px;
+}
+
+.hint{
+	padding:10px 0 0 5px;
+	float:right;
+}
+
+.hint2{
+	padding:10px 0 0 5px;
+	float:left;
+}
+
+a.newButton{
+	background:#9bbcb6;
+	color:#004779;
+}
+a.newButton:focus, .newButton.focus{
+	background:#9bbcb6;
+	color:#fff;
+}
+a.newButton:visited{
+	background:#9bbcb6;
+	color:#004779;
+}
+a.newButton:hover{
+	background:#fff;
+	color:#9bbcb6;
+}
+
+
+.otherButton{
+	background:#9bbcb6;
+	color:#004779;	
+}
+.otherButton:focus, .otherButton.focus{
+	background:#9bbcb6;
+	color:#fff;
+}
+.otherButton:visited{
+	background:#9bbcb6;
+	color:#004779;
+}
+.otherButton:hover{
+	background:#fff;
+	color:#9bbcb6;
+}
+
+.pegtitle{
+	color:#3c7e74;
+	font-size: 14px;
+	font-weight:bold;
+}
+
+#TableData {
+	background: #fff;
+}
+
+.search {
+	color:#000;
+}
+
+.tableStyle thead th{
+	background:#6ec5e9;
+	font-weight: bold;
+	color: #fff;
+}

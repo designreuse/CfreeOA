@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.sise.oa.domain">
+	<class name="MeetingRoom">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property  name="name" />
+		<property  name="position" />
+		<property  name="capacity" />
+		<property  name="equipmentCases" />
+		
+		<!-- 属性reservations，表示本类与 Reservation类的一对多关系-->
+		<set name="reservations">
+			<key column="meetingRoomId"/>
+			<one-to-many class="Reservation"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>

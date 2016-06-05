@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.sise.oa.domain">
+
+	<class name="Calendar">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="title" />
+		<property name="start" />
+		<property name="end" />
+		<property name="allDay" />
+		<property name="color" />		
+		
+		<!-- 属性user，表示本类与 User类的多对一关系-->
+		<many-to-one name="user" class="User" column="userId"/>
+		
+	</class>
+	
+</hibernate-mapping>

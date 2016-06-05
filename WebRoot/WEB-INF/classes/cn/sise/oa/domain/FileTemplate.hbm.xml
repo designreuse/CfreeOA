@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.sise.oa.domain">
+	<class name="FileTemplate">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property  name="name" />		
+		<property  name="summary" />		
+		<property  name="type" length="2"/>		
+		<property  name="used" length="2"/>		
+		<property  name="flowKey"/>
+		<property  name="flowName"/>
+		
+		<property  name="templateFileUrl" />
+		
+		<property  name="code" type="text"/>
+		<property  name="html" type="text"/>
+		<property  name="filed" length="500"/>
+		<property  name="text" length="500"/>
+		<property  name="flowVar" length="500"/>
+		
+	
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 配置为开发模式 -->
+    <constant name="struts.devMode" value="true" />
+    <!-- 把扩展名配置为action -->
+    <constant name="struts.action.extension" value="action" />
+    <!-- 把主题配置为simple -->
+    <constant name="struts.ui.theme" value="simple" /> 
+	
+      		   
+    <package name="default" namespace="/" extends="struts-default">
+    
+    <interceptors>
+   		<!-- 声明权限拦截器 -->
+   		<interceptor name="checkPrivilege" class="cn.sise.oa.util.CheckPrivilegeInterceptor"></interceptor>
+   		
+   		<!-- 重新定义默认的拦截器栈 -->
+   		<interceptor-stack name="defaultStack">
+   			<interceptor-ref name="checkPrivilege"></interceptor-ref>
+   			<interceptor-ref name="defaultStack"></interceptor-ref>
+   		</interceptor-stack>
+   	</interceptors>
+    
+    <!-- 全局的Result配置 ，权限拦截不能使用action内的视图，所有配置全局视图-->
+	<global-results>
+		<result name="loginUI">/WEB-INF/jsp/userAction/loginUI.jsp</result>
+		<result name="noPrivilegeError">/noPrivilegeError.jsp</result>
+		<result name="input">/error.jsp</result>
+	</global-results>
+	
+	<!-- 主页 -->
+	<action name="home_*" class="homeAction" method="{1}">
+		<result name="{1}">/WEB-INF/jsp/homeAction/{1}.jsp</result>			
+	</action>
+	
+	<!-- 岗位管理 -->
+	<action name="role_*" class="roleAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/roleAction/list.jsp</result>
+		<result name="saveUI">/WEB-INF/jsp/roleAction/saveUI.jsp</result>
+		<result name="setPrivilegeUI">/WEB-INF/jsp/roleAction/setPrivilegeUI.jsp</result>
+		<result name="toList" type="redirectAction">role_list</result>
+	</action>
+
+	<!-- 部门管理 -->
+	<action name="department_*" class="departmentAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/departmentAction/list.jsp</result>
+		<result name="saveUI">/WEB-INF/jsp/departmentAction/saveUI.jsp</result>
+		<result name="toList" type="redirectAction">department_list?parentId=${parentId}</result>
+	</action>
+
+	<!-- 用户管理 -->
+	<action name="user_*" class="userAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/userAction/list.jsp</result>
+		<result name="saveUI">/WEB-INF/jsp/userAction/saveUI.jsp</result>
+		<result name="statisticsDepart">/WEB-INF/jsp/userAction/statisticsDepart.jsp</result>
+		<result name="findConnection">/WEB-INF/jsp/userAction/connectionInfo.jsp</result>
+		<result name="toList" type="redirectAction">user_list</result>
+		<result name="input">/WEB-INF/jsp/userAction/saveUI.jsp</result>
+		<result name="logout">/WEB-INF/jsp/userAction/loginUI.jsp</result>
+		<result name="toIndex" type="redirectAction">home_index.action</result>
+		<!-- <result name="input">/WEB-INF/jsp/userAction/saveUI.jsp</result> -->
+	</action>
+	
+	<!-- 个人信息管理 -->
+	<action name="person_*" class="personConfigAction" method="{1}">			
+		<result name="editUsrInfoUI">/WEB-INF/jsp/Person_Config/editUserInfoUI.jsp</result>
+		<result name="input">/WEB-INF/jsp/Person_Config/editUserInfoUI.jsp</result>
+		<result name="editUserPasswordUI">/WEB-INF/jsp/Person_Config/editPasswordUI.jsp</result>
+	</action>
+	
+	<!-- 流程模型管理 -->
+	<action name="model_*" class="modelController" method="{1}">
+    		<result name="modelList">/WEB-INF/jsp/workflow/modelList.jsp</result> 
+    		<result name="toModelList" type="redirectAction">model_modelList.action</result>
+    </action>
+	
+	<!-- 流程定义 -->
+	<action name="process_*" class="processDefinitionAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/processDefinition/list.jsp</result>
+		<result name="deployUI">/WEB-INF/jsp/processDefinition/deployUI.jsp</result>
+		<result name="toList" type="redirectAction">process_list.action</result>
+	</action>
+	
+	 <!-- 任务 -->
+	<action name="task_*" class="myTaskAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/taskAction/MyTaskList.jsp</result>
+		<result name="approveUI">/WEB-INF/jsp/taskAction/approve.jsp</result>		
+		<result name="showPresentDiagramUI">/WEB-INF/jsp/taskAction/showPresentDiagram.jsp</result>		
+		<result name="toList" type="redirectAction">task_list</result>
+		<!-- 从.bpmn文件节点的formkey中获取URL（action名） -->
+		
+		<!-- <result name="viewTaskFrom" type="redirectAction">${#url}</result> -->
+		<result name="viewTaskFrom" type="redirectAction">
+			<param name="actionName">${#action}</param>  <!-- actionName -->
+           	<param name="taskId">${#taskId}</param>   
+            <param name="deparName">${#deparName}</param> 
+            <param name="encode">true</param>
+        </result>
+	</action>
+
+	<!-- 资源管理 -->
+	<action name="resource_*" class="resourceManagementAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/resourceManagementAction/list.jsp</result>
+		<result name="addFolderUI">/WEB-INF/jsp/resourceManagementAction/addFolder.jsp</result>
+		<result name="renameUI">/WEB-INF/jsp/resourceManagementAction/rename.jsp</result>
+		<result name="uploadFileUI">/WEB-INF/jsp/resourceManagementAction/uploadFile.jsp</result>
+		<result name="toList" type="redirectAction">
+			<param name="actionName">resource_toList</param>  <!-- actionName --> 
+           	<param name="parentDirectory">${#parentDirectory}</param>    
+           	<param name="currentPath">${#currentPath}</param>      
+           <!-- 	<param name="dirExists">${#dirExists}</param>   -->    
+        </result>
+	</action>
+	
+	<!-- 日程管理 -->
+	<action name="schedule_*" class="scheduleAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/scheduleAction/list.jsp</result>
+		<result name="saveUI">/WEB-INF/jsp/scheduleAction/saveUI.jsp</result>
+		<result name="viewDetail">/WEB-INF/jsp/scheduleAction/viewDetail.jsp</result>
+		<result name="toList" type="redirectAction">schedule_list</result>
+	</action>
+	
+	<!-- 日程管理 (新版本)-->
+	<action name="calendar_*" class="calendarAction" method="{1}">
+		<result name="show">/WEB-INF/jsp/scheduleAction/Mycalendar.jsp</result>
+    </action>
+	
+	<!-- 动态信息管理 -->
+	<action name="information_*" class="informationAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/informationAction/list.jsp</result>
+		<result name="saveUI">/WEB-INF/jsp/informationAction/saveUI.jsp</result>
+		<result name="viewDetail">/WEB-INF/jsp/informationAction/viewDetail.jsp</result>
+		<result name="lookInbox">/WEB-INF/jsp/informationAction/lookInbox.jsp</result>
+		<result name="toList" type="redirectAction">information_list</result>
+	</action>
+
+	<!-- 表单模板管理 -->
+	<action name="fileTemplate_*" class="fileTemplateAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/fileTemplateAction/list.jsp</result>
+		<result name="addUI">/WEB-INF/jsp/fileTemplateAction/addUI.jsp</result>
+		<result name="customAddUI">/WEB-INF/jsp/fileTemplateAction/customAddUI.jsp</result>
+		<result name="customEditUI">/WEB-INF/jsp/fileTemplateAction/customEditUI.jsp</result>
+		<result name="toList" type="redirectAction">fileTemplate_list</result>
+	</action>
+	
+	<!-- 申请管理 -->
+	<action name="myApplication_*" class="myApplicationAction" method="{1}">
+		<result name="templateList">/WEB-INF/jsp/myApplicationAction/templateList.jsp</result>
+		<result name="list">/WEB-INF/jsp/myApplicationAction/myApplicationList.jsp</result>
+		<result name="startUI">/WEB-INF/jsp/myApplicationAction/startUI.jsp</result>
+		<result name="customStartUI">/WEB-INF/jsp/myApplicationAction/customStartUI.jsp</result>
+		<result name="toList" type="redirectAction">myApplication_list</result>
+		<result name="toTaskList" type="redirectAction">task_list</result>
+		<result name="approveUI">/WEB-INF/jsp/myApplicationAction/approve.jsp</result>
+		<result name="viewHisComment">/WEB-INF/jsp/myApplicationAction/viewHisComment.jsp</result>
+	</action>
+
+	<!-- 预约管理 -->
+	<action name="reservation_*" class="reservationAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/reservationAction/list.jsp</result>
+		<result name="listAll">/WEB-INF/jsp/reservationAction/listAll.jsp</result>
+		<result name="saveUI">/WEB-INF/jsp/reservationAction/saveUI.jsp</result>
+		<result name="detailsUI">/WEB-INF/jsp/reservationAction/detailsUI.jsp</result>
+		<result name="handelAppointUI">/WEB-INF/jsp/reservationAction/handelAppointUI.jsp</result>
+		<result name="toList" type="redirectAction">reservation_list</result>
+		<result name="toListAll" type="redirectAction">reservation_listAll</result>
+	</action>
+	
+	<!-- 预约管理（新版本） -->
+	<action name="calendarReservation_*" class="meetingRoomCalendarAction" method="{1}">
+		<result name="show">/WEB-INF/jsp/reservationAction/meetingRoomCalendar.jsp</result>		
+		<result name="toShowHandel">/WEB-INF/jsp/reservationAction/handelMeetingRoomCalendar.jsp</result>		
+		<result name="toList" type="redirectAction">calendarReservation_list</result>
+	</action>
+	
+	<!-- 会议室管理 -->
+	<action name="meetingRoom_*" class="meetingRoomAction" method="{1}">
+		<result name="list">/WEB-INF/jsp/meetingRoomAction/list.jsp</result>
+		<result name="saveUI">/WEB-INF/jsp/meetingRoomAction/saveUI.jsp</result>
+		<result name="reservationDetails">/WEB-INF/jsp/meetingRoomAction/reservationDetails.jsp</result>
+		<result name="toList" type="redirectAction">meetingRoom_list</result>
+	</action>
+
+    </package>
+
+    <!-- Add packages here -->
+
+</struts>
